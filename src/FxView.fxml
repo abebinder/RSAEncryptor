@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController">
+   <top>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <Button fx:id="generateButton" mnemonicParsing="false" onAction="#generateButtonPressed" text="Generate Keys" />
+        </items>
+      </ToolBar>
+   </top>
+   <left>
+      <FlowPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="N(Multiple of Two Huge Primes)">
+               <FlowPane.margin>
+                  <Insets top="10.0" />
+               </FlowPane.margin>
+            </Label>
+            <ScrollPane prefHeight="77.0" prefWidth="200.0">
+               <content>
+                  <TextArea fx:id="NTextArea" prefHeight="177.0" prefWidth="200.0" promptText="asdfasdf" text="asdfasfd" wrapText="true" />
+               </content>
+            </ScrollPane>
+            <Label text="e(The public key)">
+               <FlowPane.margin>
+                  <Insets top="15.0" />
+               </FlowPane.margin>
+            </Label>
+            <ScrollPane layoutX="10.0" layoutY="27.0" prefHeight="86.0" prefWidth="200.0">
+               <content>
+                  <TextArea fx:id="ETextArea" prefHeight="177.0" prefWidth="200.0" promptText="asdfasdf" text="asdfasfd" wrapText="true" />
+               </content>
+            </ScrollPane>
+            <Label text="Private Key">
+               <FlowPane.margin>
+                  <Insets top="15.0" />
+               </FlowPane.margin>
+            </Label>
+            <ScrollPane layoutX="10.0" layoutY="121.0" prefHeight="86.0" prefWidth="200.0">
+               <content>
+                  <TextArea fx:id="DTextArea" prefHeight="177.0" prefWidth="200.0" promptText="asdfasdf" text="asdfasfd" wrapText="true" />
+               </content>
+            </ScrollPane>
+         </children>
+      </FlowPane>
+   </left>
+   <center>
+      <FlowPane prefHeight="360.0" prefWidth="182.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="205.0" text="Type Message You Want to Encrypt Here" textAlignment="CENTER" wrapText="true">
+               <FlowPane.margin>
+                  <Insets top="10.0" />
+               </FlowPane.margin></Label>
+            <ScrollPane prefHeight="114.0" prefWidth="200.0">
+               <content>
+                  <TextArea fx:id="encryptThisMessage" prefHeight="177.0" prefWidth="200.0" promptText="asdfasdf" text="asdfasfd" wrapText="true" />
+               </content>
+            </ScrollPane>
+            <Button fx:id="encryptButton" mnemonicParsing="false" onAction="#EncryptButtonPressed" prefHeight="21.0" prefWidth="201.0" text="Encrypt">
+               <FlowPane.margin>
+                  <Insets top="20.0" />
+               </FlowPane.margin>
+            </Button>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="205.0" text="Encrypted Message">
+               <FlowPane.margin>
+                  <Insets top="15.0" />
+               </FlowPane.margin></Label>
+            <ScrollPane prefHeight="133.0" prefWidth="200.0">
+               <content>
+                  <TextArea fx:id="encryptedMessage" prefHeight="159.0" prefWidth="200.0" promptText="asdfasdf" text="asdfasfd" wrapText="true" />
+               </content>
+            </ScrollPane>
+         </children>
+      </FlowPane>
+   </center>
+   <right>
+      <FlowPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="205.0" text="Paste Encrypted Message Here" textAlignment="CENTER" wrapText="true">
+               <FlowPane.margin>
+                  <Insets />
+               </FlowPane.margin>
+            </Label>
+            <ScrollPane prefHeight="107.0" prefWidth="200.0">
+               <content>
+                  <TextArea fx:id="decryptThisMessage" prefHeight="177.0" prefWidth="200.0" promptText="asdfasdf" text="asdfasfd" wrapText="true" />
+               </content>
+            </ScrollPane>
+            <Button fx:id="decryptButton" mnemonicParsing="false" onAction="#decryptButtonPressed" prefHeight="21.0" prefWidth="201.0" text="Decrypt">
+               <FlowPane.margin>
+                  <Insets top="20.0" />
+               </FlowPane.margin>
+            </Button>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="205.0" text="Decrypted Message">
+               <FlowPane.margin>
+                  <Insets top="15.0" />
+               </FlowPane.margin>
+            </Label>
+            <ScrollPane prefHeight="133.0" prefWidth="200.0">
+               <content>
+                  <TextArea fx:id="decryptedMessage" prefHeight="159.0" prefWidth="200.0" promptText="asdfasdf" text="asdfasfd" wrapText="true" />
+               </content>
+            </ScrollPane>
+         </children></FlowPane>
+   </right>
+</BorderPane>

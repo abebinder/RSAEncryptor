@@ -3,7 +3,7 @@ import java.util.*;
 public class Controller {
 
 	public static void main(String[] args) {
-		Derp derp=new Derp();
+		PublicKeyEncryption derp=new PublicKeyEncryption();
 	BigNumberUtils utils=new BigNumberUtils();
 	derp.method();
 	}
