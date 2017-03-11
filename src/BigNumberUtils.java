@@ -44,35 +44,32 @@ public class BigNumberUtils {
 	public BigInteger bigEuclidean(BigInteger phi, BigInteger e,
 			BigInteger leftTop, BigInteger rightTop, BigInteger leftBottom,
 			BigInteger rightBottom){
+		BigInteger zero=new BigInteger("0");
 		BigInteger one=new BigInteger("1");
 		BigInteger derp=leftTop.divide(leftBottom);
 		BigInteger hurka=derp.multiply(leftBottom);
 		BigInteger durka=derp.multiply(rightBottom);
 		BigInteger newLeftBottom=leftTop.subtract(hurka);
 		BigInteger newRightBottom=rightTop.subtract(durka);
+		
+		if(newLeftBottom.compareTo(zero)<=0){
+			System.out.println("shit");
+			//newLeftBottom=newLeftBottom.add(phi);
+		}
+		
+		if(newRightBottom.compareTo(zero)<=0){
+			while(newRightBottom.compareTo(zero)<=0){
+			newRightBottom=newRightBottom.add(phi);
+			}
+		}
+		
+		if(newLeftBottom.compareTo(one)==0){
+			return newRightBottom;
+		}
+		return bigEuclidean(phi, e, leftBottom, rightBottom, newLeftBottom, newRightBottom);
 	}
 	
-	public void solve(long a, long b)
-    {
-        long x = 0, y = 1, lastx = 1, lasty = 0, temp;
-        while (b != 0)
-        {
-            long q = a / b;
-            long r = a % b;
- 
-            a = b;
-            b = r;
- 
-            temp = x;
-            x = lastx - q * x;
-            lastx = temp;
- 
-            temp = y;
-            y = lasty - q * y;
-            lasty = temp;            
-        }
-        System.out.println("Roots  x : "+ lastx +" y :"+ lasty);
-    }
+	
 	
 	
 }
