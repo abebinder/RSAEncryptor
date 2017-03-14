@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class PublicKeyEncryption {
 	BigInteger zero=new BigInteger("0");
 	BigInteger one=new BigInteger("1");
-	int digitsOfPrimes=103;
+	int digitsOfPrimes=103;//hi
 	double convertBase10DigitsToBase2Digits=(digitsOfPrimes*Math.log(10))/Math.log(2);
 	int inputAsInt=(int)convertBase10DigitsToBase2Digits;
 	BigNumberUtils utils=new BigNumberUtils();
