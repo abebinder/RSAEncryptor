@@ -6,11 +6,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController">
+<BorderPane prefHeight="666.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIController">
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
           <Button fx:id="generateButton" mnemonicParsing="false" onAction="#generateButtonPressed" text="Generate Keys" />
+            <CheckBox fx:id="padNumbers" mnemonicParsing="false" selected="true" text="Pad Numbers Too Small Or Numbers That Begin With Zero" />
+            <CheckBox fx:id="breakApartLarge" mnemonicParsing="false" opacity="0.0" selected="true" text="Break Apart Numbers Too Big" />
         </items>
       </ToolBar>
    </top>
@@ -22,19 +24,19 @@
                   <Insets top="10.0" />
                </FlowPane.margin>
             </Label>
-            <ScrollPane prefHeight="77.0" prefWidth="200.0">
+            <ScrollPane prefHeight="188.0" prefWidth="200.0">
                <content>
-                  <TextArea fx:id="NTextArea" prefHeight="177.0" prefWidth="200.0" promptText="asdfasdf" text="asdfasfd" wrapText="true" />
+                  <TextArea fx:id="NTextArea" prefHeight="177.0" prefWidth="196.0" text="This number is the multiple of two large primes. It is the modulus used in both encrypting and decrypting and is made public." wrapText="true" />
                </content>
             </ScrollPane>
-            <Label text="e(The public key)">
+            <Label text="Public Key">
                <FlowPane.margin>
                   <Insets top="15.0" />
                </FlowPane.margin>
             </Label>
-            <ScrollPane layoutX="10.0" layoutY="27.0" prefHeight="86.0" prefWidth="200.0">
+            <ScrollPane layoutX="10.0" layoutY="27.0" prefHeight="171.0" prefWidth="200.0">
                <content>
-                  <TextArea fx:id="ETextArea" prefHeight="177.0" prefWidth="200.0" promptText="asdfasdf" text="asdfasfd" wrapText="true" />
+                  <TextArea fx:id="ETextArea" prefHeight="177.0" prefWidth="186.0" text="This number is the smallest relative prime to phi, a number that equals (p-1)(q-1) where p and q are the primes that multiply to make n." wrapText="true" />
                </content>
             </ScrollPane>
             <Label text="Private Key">
@@ -42,71 +44,95 @@
                   <Insets top="15.0" />
                </FlowPane.margin>
             </Label>
-            <ScrollPane layoutX="10.0" layoutY="121.0" prefHeight="86.0" prefWidth="200.0">
+            <ScrollPane layoutX="10.0" layoutY="121.0" prefHeight="167.0" prefWidth="200.0">
                <content>
-                  <TextArea fx:id="DTextArea" prefHeight="177.0" prefWidth="200.0" promptText="asdfasdf" text="asdfasfd" wrapText="true" />
+                  <TextArea fx:id="DTextArea" prefHeight="177.0" prefWidth="188.0" text="This number is the inverse of the public key in modulus(n). It is found by performing the extended euclidean algorithim on phi and the public key. It is used to undo the encryption that results in raising a message to the e power in moduls n.  It is nearly impossible to figure out without knowing the prime factorization of n.This stays private and does not get sent out to anyone. Only the person recieving encrypted data knows this value. to recieve the message." wrapText="true" />
                </content>
             </ScrollPane>
          </children>
+         <BorderPane.margin>
+            <Insets left="20.0" />
+         </BorderPane.margin>
       </FlowPane>
    </left>
    <center>
-      <FlowPane prefHeight="360.0" prefWidth="182.0" BorderPane.alignment="CENTER">
+      <GridPane>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="391.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="429.0" minHeight="10.0" prefHeight="190.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="285.0" minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="242.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="258.0" minHeight="10.0" prefHeight="258.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="205.0" text="Type Message You Want to Encrypt Here" textAlignment="CENTER" wrapText="true">
-               <FlowPane.margin>
-                  <Insets top="10.0" />
-               </FlowPane.margin></Label>
-            <ScrollPane prefHeight="114.0" prefWidth="200.0">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="595.0" text="Type Message You Want to Encrypt Here" textAlignment="CENTER" wrapText="true" />
+            <ScrollPane prefHeight="311.0" prefWidth="595.0" GridPane.rowIndex="1">
                <content>
-                  <TextArea fx:id="encryptThisMessage" prefHeight="177.0" prefWidth="200.0" promptText="asdfasdf" text="asdfasfd" wrapText="true" />
+                  <TextArea fx:id="encryptThisMessage" prefHeight="183.0" prefWidth="507.0" text="Enter an integer here that you want to encrypt. The encryption algorithim will use the public key and n in the textboxs to the left. If you know how to calculate these values for yourself, feel free to do so and the program can encrypt using your values. This program can come up with random very large keys by pressing the generate keys button. Leave padding checked for both the encryting and decrypting process in order to deal with numbers that are too small to encrypt otherwise. If you wish to encrypt with your own values, it is recommended you uncheck these boxes." wrapText="true">
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </TextArea>
                </content>
+               <GridPane.margin>
+                  <Insets left="15.0" right="20.0" />
+               </GridPane.margin>
             </ScrollPane>
-            <Button fx:id="encryptButton" mnemonicParsing="false" onAction="#EncryptButtonPressed" prefHeight="21.0" prefWidth="201.0" text="Encrypt">
-               <FlowPane.margin>
-                  <Insets top="20.0" />
-               </FlowPane.margin>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="596.0" text="Encrypted Message" GridPane.rowIndex="3" />
+            <Button fx:id="encryptButton" mnemonicParsing="false" onAction="#EncryptButtonPressed" prefHeight="86.0" prefWidth="277.0" text="Encrypt" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="150.0" right="150.0" top="25.0" />
+               </GridPane.margin>
             </Button>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="205.0" text="Encrypted Message">
-               <FlowPane.margin>
-                  <Insets top="15.0" />
-               </FlowPane.margin></Label>
-            <ScrollPane prefHeight="133.0" prefWidth="200.0">
+            <ScrollPane prefHeight="124.0" prefWidth="200.0" GridPane.rowIndex="4">
                <content>
-                  <TextArea fx:id="encryptedMessage" prefHeight="159.0" prefWidth="200.0" promptText="asdfasdf" text="asdfasfd" wrapText="true" />
+                  <TextArea fx:id="encryptedMessage" prefHeight="428.0" prefWidth="518.0" text="The integer that comes out here is an encrypted message. Good luck trying to break it if you don't have the private key! " wrapText="true" />
                </content>
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
             </ScrollPane>
          </children>
-      </FlowPane>
+         <BorderPane.margin>
+            <Insets left="15.0" />
+         </BorderPane.margin>
+      </GridPane>
    </center>
    <right>
       <FlowPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="205.0" text="Paste Encrypted Message Here" textAlignment="CENTER" wrapText="true">
                <FlowPane.margin>
-                  <Insets />
+                  <Insets right="15.0" top="15.0" />
                </FlowPane.margin>
             </Label>
-            <ScrollPane prefHeight="107.0" prefWidth="200.0">
+            <ScrollPane prefHeight="173.0" prefWidth="200.0">
                <content>
-                  <TextArea fx:id="decryptThisMessage" prefHeight="177.0" prefWidth="200.0" promptText="asdfasdf" text="asdfasfd" wrapText="true" />
+                  <TextArea fx:id="decryptThisMessage" prefHeight="177.0" prefWidth="187.0" text="S" wrapText="true" />
                </content>
             </ScrollPane>
-            <Button fx:id="decryptButton" mnemonicParsing="false" onAction="#decryptButtonPressed" prefHeight="21.0" prefWidth="201.0" text="Decrypt">
+            <Button fx:id="decryptButton" mnemonicParsing="false" onAction="#decryptButtonPressed" prefHeight="82.0" prefWidth="168.0" text="Decrypt">
                <FlowPane.margin>
-                  <Insets top="20.0" />
+                  <Insets left="15.0" right="20.0" top="20.0" />
                </FlowPane.margin>
             </Button>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="205.0" text="Decrypted Message">
                <FlowPane.margin>
-                  <Insets top="15.0" />
+                  <Insets bottom="10.0" top="8.0" />
                </FlowPane.margin>
             </Label>
-            <ScrollPane prefHeight="133.0" prefWidth="200.0">
+            <ScrollPane prefHeight="252.0" prefWidth="200.0">
                <content>
-                  <TextArea fx:id="decryptedMessage" prefHeight="159.0" prefWidth="200.0" promptText="asdfasdf" text="asdfasfd" wrapText="true" />
+                  <TextArea fx:id="decryptedMessage" prefHeight="260.0" prefWidth="187.0" wrapText="true" />
                </content>
             </ScrollPane>
-         </children></FlowPane>
+         </children>
+         <BorderPane.margin>
+            <Insets right="15.0" />
+         </BorderPane.margin></FlowPane>
    </right>
 </BorderPane>

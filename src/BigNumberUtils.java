@@ -46,16 +46,12 @@ public class BigNumberUtils {
 			BigInteger rightBottom){
 		BigInteger zero=new BigInteger("0");
 		BigInteger one=new BigInteger("1");
-		BigInteger derp=leftTop.divide(leftBottom);
-		BigInteger hurka=derp.multiply(leftBottom);
-		BigInteger durka=derp.multiply(rightBottom);
-		BigInteger newLeftBottom=leftTop.subtract(hurka);
-		BigInteger newRightBottom=rightTop.subtract(durka);
+		BigInteger leftTopDivideLeftBottom=leftTop.divide(leftBottom);
+		BigInteger leftBottomMultiplyLeftTopDivideLeftBottom=leftTopDivideLeftBottom.multiply(leftBottom);
+		BigInteger rightBottomMultiplyLeftTopDivideLeftBottom=leftTopDivideLeftBottom.multiply(rightBottom);
+		BigInteger newLeftBottom=leftTop.subtract(leftBottomMultiplyLeftTopDivideLeftBottom);
+		BigInteger newRightBottom=rightTop.subtract(rightBottomMultiplyLeftTopDivideLeftBottom);
 		
-		if(newLeftBottom.compareTo(zero)<=0){
-			System.out.println("shit");
-			//newLeftBottom=newLeftBottom.add(phi);
-		}
 		
 		if(newRightBottom.compareTo(zero)<=0){
 			while(newRightBottom.compareTo(zero)<=0){
@@ -69,6 +65,33 @@ public class BigNumberUtils {
 		return bigEuclidean(phi, e, leftBottom, rightBottom, newLeftBottom, newRightBottom);
 	}
 	
+	public BigInteger stickAOneOnTheEnd(BigInteger big){
+		String bigAsString=big.toString();
+		bigAsString=bigAsString+"1";
+		BigInteger newbig= new BigInteger(bigAsString);
+		return newbig;
+	}
+	
+	public BigInteger stickAOneOnTheBeginning(BigInteger big){
+		String bigAsString=big.toString();
+		bigAsString="1"+bigAsString;
+		BigInteger newbig= new BigInteger(bigAsString);
+		return newbig;
+	}
+	
+	public BigInteger takeAOneOffEnd(BigInteger big){
+		String bigAsString=big.toString();
+		bigAsString=bigAsString.substring(0, bigAsString.length()-1);
+		BigInteger newBig= new BigInteger(bigAsString);
+		return newBig;
+	}
+	
+	public BigInteger takeAOneOffTheBeginning(BigInteger big){
+		String bigAsString=big.toString();
+		bigAsString=bigAsString.substring(1, bigAsString.length());
+		BigInteger newbig= new BigInteger(bigAsString);
+		return newbig;
+	}
 	
 	
 	
