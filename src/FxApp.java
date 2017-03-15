@@ -7,8 +7,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
-/*the app itself. 
-*all the code here just junk to load the fxml file which
+/*the app itself, what you should be running
+*all the code here is just junk to load the fxml file which
 *I setup using scene builder
  */
 
