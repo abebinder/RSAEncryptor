@@ -1,24 +1,27 @@
-import java.lang.*;
 import java.math.*;
-import java.util.ArrayList;
 public class PublicKeyEncryption {
+	BigNumberUtils utils=new BigNumberUtils();
 	BigInteger zero=new BigInteger("0");
 	BigInteger one=new BigInteger("1");
-	int digitsOfPrimes=103;//hi
-	double convertBase10DigitsToBase2Digits=(digitsOfPrimes*Math.log(10))/Math.log(2);
-	int inputAsInt=(int)convertBase10DigitsToBase2Digits;
-	BigNumberUtils utils=new BigNumberUtils();
-	//BigInteger lowerBoundForPrimes= new BigInteger("10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
-	BigInteger lowerBoundForPrimes=new BigInteger("0");
-	BigInteger p=utils.generateRandomBigPrime(lowerBoundForPrimes, inputAsInt);
-	BigInteger q=utils.generateRandomBigPrime(lowerBoundForPrimes, inputAsInt);
+	int digitsOfPrimes=103; //change this to change the number of digits of the primes that are generated.
+	
+	double base2PrimeDigitsAsDouble=(digitsOfPrimes*Math.log(10))/Math.log(2);/*
+	This number translates the number of digits you want to have in your prime
+	into the minimum bitlength a number with such digits can be expressed, which
+	is the parameter the probablePrime method uses. 
+	*/
+	
+	int base2PrimeDigitsAsInt=(int)base2PrimeDigitsAsDouble; //casts the double as int
+	
+	BigInteger lowerBoundForPrimes=zero;
+	BigInteger p=utils.generateRandomBigPrime(lowerBoundForPrimes, base2PrimeDigitsAsInt);
+	BigInteger q=utils.generateRandomBigPrime(lowerBoundForPrimes, base2PrimeDigitsAsInt);
 	BigInteger n=p.multiply(q);
-	BigInteger pMinus1=p.subtract(new BigInteger("1"));
-	BigInteger qMinus1=q.subtract(new BigInteger("1"));
+	BigInteger pMinus1=p.subtract(one);
+	BigInteger qMinus1=q.subtract(one);
 	BigInteger phi=pMinus1.multiply(qMinus1);
 	BigInteger e=utils.spitLowestRelativePrime(phi);
-	BigInteger d=utils.bigEuclidean(phi, e, phi, phi, e, one);
-	BigInteger de=d.multiply(e);
+	BigInteger d=utils.bigEuclideanExtendedShortHand(phi, e, phi, phi, e, one);//d is found by using the euclidean algorithim on e and phi
 
 	public BigInteger getN(){
 		return n;
@@ -31,27 +34,34 @@ public class PublicKeyEncryption {
 	public BigInteger getPrivateKey(){
 		return d;
 	}
-
+	
+	/*
+	 * This is kind of amazing. All the encryption really does is raise the message
+	 * to the e power mod n. That's it. Yet, there is no way to undo this 
+	 * function without knowing d, which is obtained by knowing phi which is obtained by 
+	 * knowing the prime factorization of n.
+	 */
 	public BigInteger encrypt(BigInteger encryptThis, BigInteger publicKey, BigInteger primeMultiple){
 		BigInteger result=encryptThis.modPow(publicKey, primeMultiple);
 		return result;
 	}
 
+	/*
+	 * Decrypting is equally amazing. All we do is raise the encrypted message to
+	 * d power mod n, and it spits back are original message.
+	 */
 	public BigInteger decrypt(BigInteger decryptThis, BigInteger privateKey, BigInteger primeMultiple){
 		BigInteger result=decryptThis.modPow(privateKey, primeMultiple);
 		return result;
 	}
 	
-	public String addAOneToBeginning(String s){
-		s="1"+s;
-		return s;
-	}
 	
-	public String removeAOneFromBeginning(String s){
-		s=s.substring(1, s.length());
-		return s;
-	}
-
+/*
+ * In the case that our message is too short (raising it to the eth power does not 
+ * cross n) or that the message begins with a zero, we must pad the number by
+ * transforming it into a larger integer by first adding a one to the beginning and 
+ * end and then adding a bunch of zeroes until it is a size that is encryptable mod(n)
+ */
 	public BigInteger pad(String padThis){
 		String padThisString=padThis.toString();
 		padThisString="1"+padThisString+"1";
@@ -68,6 +78,12 @@ public class PublicKeyEncryption {
 		return padded;
 	}
 	
+	
+	/*
+	 * Just undoes the padding to get back the proper original message
+	 * after a message is decrypted. First it removes
+	 * the zeroes, then the one at the front and back of the number.
+	 */
 	public String dePad(BigInteger dePadThis){
 		String dePadThisString=dePadThis.toString();
 		boolean b=true;
@@ -83,41 +99,6 @@ public class PublicKeyEncryption {
 		return dePadThisString;
 	}
 	
-	public BigInteger encryptLong(BigInteger encryptThis, BigInteger multipliedPrimes,
-			BigInteger publicKey){
-		ArrayList<String> bunch=new ArrayList<String>();
-		String multipliedPrimesString=multipliedPrimes.toString();
-		int lengthEachNeedsBe=multipliedPrimesString.length()-2;
-		String encryptThisString=encryptThis.toString();
-		String subString="";
-		for(int i=0; i<multipliedPrimesString.length(); i++){
-			subString=subString+encryptThisString.charAt(i);
-			if(i%lengthEachNeedsBe==0&&i!=0&&i!=1||i==multipliedPrimesString.length()-1){
-				bunch.add(new String(subString));
-				subString=""; //toDo
-			}
-			if(i==multipliedPrimesString.length()-1){
-				String encryptedString="";
-				for(int j=0; j<bunch.size(); j++){
-					BigInteger partialToEncrypt=new BigInteger(bunch.get(j));
-					BigInteger partialEncrypted=encrypt(partialToEncrypt, publicKey, multipliedPrimes);
-					String partialEncryptedString=partialEncrypted.toString();
-					encryptedString=encryptedString+partialEncryptedString;
-				}
-				BigInteger result= new BigInteger(encryptedString);
-				return result;
-			}
-		}
-		
-		return new BigInteger("0");
-	}
 	
-	public BigInteger decryptLong(BigInteger decryptThis, BigInteger multipliedPrimes,
-			BigInteger privateKey){
-				
-		
-		return privateKey;
-		
-	}
 
 }

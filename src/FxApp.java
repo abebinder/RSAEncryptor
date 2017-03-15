@@ -7,7 +7,12 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
-public class FxApp extends Application {
+/*the app itself. 
+*all the code here just junk to load the fxml file which
+*I setup using scene builder
+ */
+
+public class FxApp extends Application { 
 	private Stage primaryStage;
 	private BorderPane mainLayout;
 

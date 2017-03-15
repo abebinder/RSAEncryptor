@@ -112,7 +112,7 @@
             </Label>
             <ScrollPane prefHeight="173.0" prefWidth="200.0">
                <content>
-                  <TextArea fx:id="decryptThisMessage" prefHeight="177.0" prefWidth="187.0" text="S" wrapText="true" />
+                  <TextArea fx:id="decryptThisMessage" prefHeight="177.0" prefWidth="187.0" text="Enter an encrypted message here and press decrypt to undo it using private key and n from the textboxes to the left." wrapText="true" />
                </content>
             </ScrollPane>
             <Button fx:id="decryptButton" mnemonicParsing="false" onAction="#decryptButtonPressed" prefHeight="82.0" prefWidth="168.0" text="Decrypt">
@@ -127,7 +127,7 @@
             </Label>
             <ScrollPane prefHeight="252.0" prefWidth="200.0">
                <content>
-                  <TextArea fx:id="decryptedMessage" prefHeight="260.0" prefWidth="187.0" wrapText="true" />
+                  <TextArea fx:id="decryptedMessage" prefHeight="260.0" prefWidth="187.0" text="The message that prints out here will be the decrypted message." wrapText="true" />
                </content>
             </ScrollPane>
          </children>

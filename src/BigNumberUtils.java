@@ -1,12 +1,16 @@
 import java.math.*;
 import java.util.*;
 public class BigNumberUtils {
-
-	public BigInteger spitLowestRelativePrime(BigInteger big){
+	
+/*
+ * This method gives the first number 3 or higher that has no common divisors with the 
+ * parameter (including itself) besides one.
+ */
+	public BigInteger spitLowestRelativePrime(BigInteger big){ 
 		boolean b=true;
 		BigInteger i=new BigInteger("3");
 		BigInteger one=new BigInteger("1");
-		while(b){
+		while(b){ //this while loop increments i until it finds a number that works
 			if(gcd(i,big).compareTo(one)==0){
 				return i;
 			}
@@ -15,6 +19,12 @@ public class BigNumberUtils {
 		return big;	
 	}
 
+	
+	/*
+	 * This method generates a large number that is probably prime by using 
+	 * the biginteger probableprime method. The chance that the number found is not
+	 * prime is tiny (2^-100).
+	 */
 	public BigInteger generateRandomBigPrime(BigInteger lowerBound, int upperBound2toTheN){
 		Random r= new Random();
 		while(true){
@@ -25,13 +35,9 @@ public class BigNumberUtils {
 		}
 	}
 
-	public BigInteger generateRandomBigInteger(BigInteger upperbound){
-		BigInteger big;
-		Random r =new Random();
-		big=new BigInteger(upperbound.bitLength(), r);
-		return big;
-	}
-
+/*
+ * This method finds the gcd of two bigIntegers via the euclidean algorithim.
+ */
 	public static BigInteger gcd(BigInteger p, BigInteger q) {
 		BigInteger zero=new BigInteger("0");
 		if (q.compareTo(zero)==0) {
@@ -40,8 +46,17 @@ public class BigNumberUtils {
 		return gcd(q, p.remainder(q));
 	}
 	
-	
-	public BigInteger bigEuclidean(BigInteger phi, BigInteger e,
+	/*
+	 * 
+	 * Through online research, I found a shorthand way to implement the extended
+	 * euclidean algorithim that avoided back substitution, reducing the amount
+	 * of code I had to write. This is NOT copied code,
+	 * however, the algorithim that I implemented I did not come up with on my own
+	 *  and was described in detail by Anthony Vance
+	 * on youtube. I translated his line of reasoning
+	 * into code. https://youtu.be/Z8M2BTscoD4?t=10m6s
+	 */
+	public BigInteger bigEuclideanExtendedShortHand(BigInteger phi, BigInteger e,
 			BigInteger leftTop, BigInteger rightTop, BigInteger leftBottom,
 			BigInteger rightBottom){
 		BigInteger zero=new BigInteger("0");
@@ -62,36 +77,14 @@ public class BigNumberUtils {
 		if(newLeftBottom.compareTo(one)==0){
 			return newRightBottom;
 		}
-		return bigEuclidean(phi, e, leftBottom, rightBottom, newLeftBottom, newRightBottom);
+		return bigEuclideanExtendedShortHand(phi, e, leftBottom, rightBottom, newLeftBottom, newRightBottom);
 	}
 	
-	public BigInteger stickAOneOnTheEnd(BigInteger big){
-		String bigAsString=big.toString();
-		bigAsString=bigAsString+"1";
-		BigInteger newbig= new BigInteger(bigAsString);
-		return newbig;
-	}
 	
-	public BigInteger stickAOneOnTheBeginning(BigInteger big){
-		String bigAsString=big.toString();
-		bigAsString="1"+bigAsString;
-		BigInteger newbig= new BigInteger(bigAsString);
-		return newbig;
-	}
 	
-	public BigInteger takeAOneOffEnd(BigInteger big){
-		String bigAsString=big.toString();
-		bigAsString=bigAsString.substring(0, bigAsString.length()-1);
-		BigInteger newBig= new BigInteger(bigAsString);
-		return newBig;
-	}
 	
-	public BigInteger takeAOneOffTheBeginning(BigInteger big){
-		String bigAsString=big.toString();
-		bigAsString=bigAsString.substring(1, bigAsString.length());
-		BigInteger newbig= new BigInteger(bigAsString);
-		return newbig;
-	}
+	
+	
 	
 	
 	
