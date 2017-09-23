@@ -8,7 +8,7 @@ import javafx.scene.control.TextArea;
 /*
  * 
  * When using scenebuilder, it is necessary to make a controller class to handle
- * the code that actually executes when different
+ * the codse that actually executes when different
  * things in your gui are activated. Each object here
  * is connected to some object in the fxml file, ad changing
  * it here changes it in the actually gui.

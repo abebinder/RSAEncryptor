@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 /*the app itself, what you should be running
 *all the code here is just junk to load the fxml file which
-*I setup using scene builder
+*I setup using scene builder d
  */
 
 public class FxApp extends Application { 
