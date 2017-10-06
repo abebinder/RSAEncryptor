@@ -1,0 +1,5 @@
+A javafx app that can generate public and private keys and proper modulus
+using primes large enough to be secure against modern computers.
+Can also encrypt and decrypt integer messages using eigther generated keys
+or custom ones the user inputs.
+To run, compile all and run FxApp.java
