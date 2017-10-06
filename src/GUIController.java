@@ -11,7 +11,7 @@ import javafx.scene.control.TextArea;
  * the codse that actually executes when different
  * things in your gui are activated. Each object here
  * is connected to some object in the fxml file, ad changing
- * it here changes it in the actually gui.
+ * it here changes it in the actually gui.d
  */
 
 public class GUIController {

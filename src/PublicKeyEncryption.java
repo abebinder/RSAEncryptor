@@ -7,7 +7,7 @@ public class PublicKeyEncryption {
 	
 	double base2PrimeDigitsAsDouble=(digitsOfPrimes*Math.log(10))/Math.log(2);/*
 	This number translates the number of digits you want to have in your prime
-	into the minimudsm bitlength a number with such digits can be expressed, which
+	into the minimum bitlength a number with such digits can be expressed, which
 	is the parameter the probablePrime method uses. 
 	*/
 	

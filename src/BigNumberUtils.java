@@ -4,7 +4,7 @@ public class BigNumberUtils {
 	
 /*
  * This method gives the first number 3 or higher that has no common divisors with the 
- * parameter (inclsuding itself) besides one.
+ * parameter (including itself) besides one.
  */
 	public BigInteger spitLowestRelativePrime(BigInteger big){ 
 		boolean b=true;
